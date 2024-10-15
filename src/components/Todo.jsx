@@ -49,6 +49,7 @@ const Todo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
       <div className="todo-extra-informations">
         <p>Due Date: {task.dueDate}</p>
         <p>Priority: {task.priority}</p>
+        <p>Category: {task.category}</p>
       </div>
     </div>
   );

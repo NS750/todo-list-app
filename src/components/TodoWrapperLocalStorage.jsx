@@ -6,6 +6,8 @@ import EditTodoForm from "./EditTodoForm";
 
 export const TodoWrapperLocalStorage = () => {
   const [todos, setTodos] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState('all'); 
+
 
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -13,7 +15,7 @@ export const TodoWrapperLocalStorage = () => {
   }, []);
 
   // Update this function to accept task and description
-  const addTodo = (task, description, dueDate, priority) => {
+  const addTodo = (task, description, dueDate, priority, category) => {
     const newTodos = [
       ...todos,
       {
@@ -22,6 +24,7 @@ export const TodoWrapperLocalStorage = () => {
         description,
         dueDate,
         priority,
+        category, 
         completed: false,
         isEditing: false,
       },
@@ -29,6 +32,13 @@ export const TodoWrapperLocalStorage = () => {
     setTodos(newTodos);
     localStorage.setItem("todos", JSON.stringify(newTodos));
   };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (categoryFilter === 'all') {
+      return true; // Show all todos when 'all' is selected
+    }
+    return todo.category === categoryFilter; // Show todos that match the selected category
+  });
 
   const toggleComplete = (id) => {
     const newTodos = todos.map((todo) =>
@@ -52,10 +62,10 @@ export const TodoWrapperLocalStorage = () => {
     );
   };
 
-  const editTask = (task, description, id) => {
+  const editTask = (task, description, priority, category, id) => {
     const newTodos = todos.map((todo) =>
       todo.id === id
-        ? { ...todo, task, description, isEditing: !todo.isEditing }
+        ? { ...todo, task, description, priority, category,  isEditing: !todo.isEditing }
         : todo
     );
     setTodos(newTodos);
@@ -64,21 +74,27 @@ export const TodoWrapperLocalStorage = () => {
 
   return (
     <div className="TodoWrapper">
-      <h1>Get Things Done!</h1>
-      <TodoForm addTodo={addTodo} />
-      {todos.map((todo, index) =>
-        todo.isEditing ? (
-          <EditTodoForm editTodo={editTask} task={todo} key={todo.id} />
-        ) : (
-          <Todo
-            task={todo}
-            key={todo.id}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />
-        )
-      )}
+    <h1>Get Things Done!</h1>
+    <TodoForm addTodo={addTodo} />
+    <div className="category-buttons">
+      <button onClick={() => setCategoryFilter('all')} className={categoryFilter === 'all' ? 'active' : ''}>All</button>
+      <button onClick={() => setCategoryFilter('work')}  className={categoryFilter === 'work' ? 'active' : ''}>Work</button>
+      <button onClick={() => setCategoryFilter('personal')} className={categoryFilter === 'personal' ? 'active' : ''}>Personal</button>
+      <button onClick={() => setCategoryFilter('school')}  className={categoryFilter === 'school' ? 'active' : ''}>School</button>
     </div>
+    {filteredTodos.map((todo) =>
+      todo.isEditing ? (
+        <EditTodoForm editTodo={editTask} task={todo} key={todo.id} />
+      ) : (
+        <Todo
+          task={todo}
+          key={todo.id}
+          toggleComplete={toggleComplete}
+          deleteTodo={deleteTodo}
+          editTodo={editTodo}
+        />
+      )
+    )}
+  </div>
   );
 };

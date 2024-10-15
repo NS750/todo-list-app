@@ -5,14 +5,16 @@ const TodoForm = ({ addTodo }) => {
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState(''); 
     const [priority, setPriority] = useState(''); 
+    const [category, setCategory] = useState(''); // New state for category
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addTodo(task, description, dueDate, priority); 
+        addTodo(task, description, dueDate, priority, category); 
         setTask('');
         setDescription('');
         setDueDate('');
         setPriority('');
+        setCategory('');
     };
 
     return (
@@ -31,7 +33,7 @@ const TodoForm = ({ addTodo }) => {
                 className="todo-input"
                 placeholder='Add a description'
             />
-           <div className="due-priority-container">
+            <div className="due-priority-container">
                 <input
                     type="date"
                     value={dueDate}
@@ -45,6 +47,14 @@ const TodoForm = ({ addTodo }) => {
                     <option value="high">High</option>
                 </select>
             </div>
+            {/* Category selection */}
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className="todo-input category">
+                <option value="">Select Category</option>
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="shopping">Shopping</option>
+                <option value="others">Others</option>
+            </select>
             <button type="submit" className='todo-btn'>Add Todo</button>
         </form>
     );

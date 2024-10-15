@@ -44,11 +44,11 @@ h1 {
   margin-bottom: 0.2rem;
   /* margin-bottom: 2rem; */
   width: 402px;
-  color: #fff;
+  color: #d1887e;
 }
 
 .todo-input::placeholder{
- color: #fff;
+ color: #d1887e;
 } 
 
 .due-priority-container {
@@ -80,6 +80,33 @@ h1 {
 
 .todo-btn:hover{
   opacity: 80%;
+}
+
+.category-buttons button {
+  background: #fff;
+  color: #E33B25;
+  border: 1px solid #E33B25;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.category-buttons button:hover {
+  background: #E33B25;
+  color: #fff;
+}
+
+.category-buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(227, 59, 37, 0.5);
+  transform: scale(1.02);
+}
+
+.category-buttons button.active {
+  background: #d1887e;
+  color: #fff;
 }
 
 .Todo {
@@ -115,7 +142,10 @@ h1 {
 }
 
 .todo-extra-informations{
+  display: flex;
+  gap: 20px;
   font-size: 0.7rem;
+  color: #ec6f5e;
 }
 
 .show-more-btn {

@@ -14,7 +14,6 @@ export const TodoWrapperLocalStorage = () => {
     setTodos(savedTodos);
   }, []);
 
-  // Update this function to accept task and description
   const addTodo = (task, description, dueDate, priority, category) => {
     const newTodos = [
       ...todos,
@@ -35,9 +34,9 @@ export const TodoWrapperLocalStorage = () => {
 
   const filteredTodos = todos.filter((todo) => {
     if (categoryFilter === 'all') {
-      return true; // Show all todos when 'all' is selected
+      return true; 
     }
-    return todo.category === categoryFilter; // Show todos that match the selected category
+    return todo.category === categoryFilter; 
   });
 
   const toggleComplete = (id) => {

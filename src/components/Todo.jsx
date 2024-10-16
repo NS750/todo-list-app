@@ -13,8 +13,24 @@ const Todo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
     setShowMore(!showMore);
   };
 
+  const getBackgroundColor = (priority) => {
+    switch (priority) {
+      case "high":
+        return "#ffcccc"; 
+      case "medium":
+        return "#fff4cc"; 
+      case "low":
+        return "#ccffcc"; 
+      default:
+        return "#ffffff"; 
+    }
+  };
+
   return (
-    <div className={`Todo ${task.completed ? "completed" : ""}`}>
+    <div  className={`Todo ${task.completed ? "completed" : ""}`}
+    style={{
+      backgroundColor: task.completed ? "#4a4a4a;" : getBackgroundColor(task.priority),
+    }}>
       <p>{task.task}</p>
       <div className="todo-information">
         <p

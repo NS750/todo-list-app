@@ -5,7 +5,7 @@ const TodoForm = ({ addTodo }) => {
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState(''); 
     const [priority, setPriority] = useState(''); 
-    const [category, setCategory] = useState(''); // New state for category
+    const [category, setCategory] = useState(''); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,6 +25,7 @@ const TodoForm = ({ addTodo }) => {
                 onChange={(e) => setTask(e.target.value)}
                 className="todo-input"
                 placeholder='Add a task'
+                required
             />
             <input
                 type="text"
@@ -39,22 +40,24 @@ const TodoForm = ({ addTodo }) => {
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
                     className="todo-input due-date-input"
+                    required
                 />
-                <select value={priority} onChange={(e) => setPriority(e.target.value)} className="todo-input priority">
+                <select value={priority} onChange={(e) => setPriority(e.target.value)} className="todo-input priority" required>
                     <option value="">Select Priority</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                 </select>
-            </div>
+            
             {/* Category selection */}
-            <select value={category} onChange={(e) => setCategory(e.target.value)} className="todo-input category">
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className="todo-input category" required>
                 <option value="">Select Category</option>
                 <option value="work">Work</option>
                 <option value="personal">Personal</option>
                 <option value="shopping">Shopping</option>
                 <option value="others">Others</option>
             </select>
+            </div>
             <button type="submit" className='todo-btn'>Add Todo</button>
         </form>
     );

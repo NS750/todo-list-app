@@ -58,8 +58,8 @@ h1 {
 }
 
 .due-priority-container .todo-input {
-  flex: 0 0 200px; 
-  max-width: 200px; 
+  flex: 0 0 130px; 
+  max-width: 130px; 
 }
 
 .due-priority-container .todo-input:last-child {

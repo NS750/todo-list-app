@@ -25,13 +25,14 @@ app.get('/api/todos', (req, res) => {
 
 
 app.post('/api/todos', (req, res) => {
-    const { task, description, priority, category } = req.body;
+    const { task, description, priority, category, dueDate } = req.body;
     const newTodo = {
         id: todos.length + 1, 
         task,
         description,
         priority,
         category,
+        dueDate,
         completed: false,
     };
     todos.push(newTodo);
@@ -44,10 +45,11 @@ app.put('/api/todos/:id', (req, res) => {
     const todo = todos.find((t) => t.id == id);
     if (!todo) return res.status(404).json({ message: 'Todo not found' });
 
-    const { task, description, priority, category } = req.body;
+    const { task, description, priority, category, dueDate } = req.body;
     todo.task = task !== undefined ? task : todo.task;
     todo.description = description !== undefined ? description : todo.description;
     todo.priority = priority !== undefined ? priority : todo.priority;
+    todo.dueDate = dueDate !== undefined ? dueDate : todo.dueDate;
     todo.category = category !== undefined ? category : todo.category;
 
     res.json(todo);

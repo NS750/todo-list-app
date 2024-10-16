@@ -1,7 +1,7 @@
 // src/todoService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/todos'; // Change the URL if your backend runs on a different port
+const API_URL = 'http://localhost:5000/api/todos';
 
 export const getTodos = async () => {
     const response = await axios.get(API_URL);

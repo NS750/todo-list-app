@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import EditTodoForm from "./EditTodoForm";
-import { getTodos, createTodo, updateTodo, deleteTodo as deleteTodoService } from "../todoService"; // Import your API functions
+import { getTodos, createTodo, updateTodo, deleteTodo as deleteTodoService } from "../todoService";
 
 export const TodoWrapperLocalStorage = () => {
   const [todos, setTodos] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('all');
 
-  // Fetch todos from the backend
   useEffect(() => {
     const fetchTodos = async () => {
       const savedTodos = await getTodos(); 
